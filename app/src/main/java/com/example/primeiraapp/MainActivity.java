@@ -4,17 +4,14 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,16 +37,13 @@ public class MainActivity extends AppCompatActivity {
            String pass = password.getText().toString();
            login(user, pass);
         });
-
-
-
-
     }
-
     private void login(String user, String pass){
         if(user.equals("admin") && pass.equals("pass")){
             Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
             message.setVisibility(GONE);
+            Intent goToHomePage = new Intent(MainActivity.this, HomePage.class);
+            startActivity(goToHomePage);
         } else {
             message.setVisibility(VISIBLE);
             Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show();
