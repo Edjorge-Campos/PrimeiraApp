@@ -1,0 +1,25 @@
+name: Semgrep Security Scan
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  semgrep-audit:
+    name: Run SAST Scanner
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Perform Semgrep Analysis
+        run: |
+          docker run --rm -v "${{ github.workspace }}:/src" returntocorp/semgrep semgrep scan --config "p/owasp-top-ten" --config "p/mobile"
+
+
+
+
+        // background: IMPORTANT WARNING: I have not made this code myself neither do i take it's onwership
