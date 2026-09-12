@@ -15,11 +15,11 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Perform Semgrep Analysis
-        run: |
-          docker run --rm -v "${{ github.workspace }}:/src" returntocorp/semgrep semgrep scan --config "p/owasp-top-ten" --config "p/mobile"
-
-
-
-
-        // background: IMPORTANT WARNING: I have not made this code myself neither do i take it's onwership
+      - name: Run Semgrep
+        uses: returntocorp/semgrep-action@v1
+        with:
+          config: >-
+            p/owasp-top-ten
+            p/mobile
+        env:
+          SEMGREP_RULES: "p/owasp-top-ten p/mobile"
