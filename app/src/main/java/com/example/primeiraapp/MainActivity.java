@@ -12,13 +12,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 
 public class MainActivity extends AppCompatActivity {
 
 
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
     TextView message;
     EditText username, password;
-    Button loginButton;
+    Button loginButton, registerButton;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -26,30 +29,58 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-       message = findViewById(R.id.txtmessage);
+       message = findViewById(R.id.message);
        message.setVisibility(GONE);
        username = findViewById(R.id.username);
        password = findViewById(R.id.password);
-       loginButton = findViewById(R.id.button);
+       loginButton = findViewById(R.id.btnConfirm);
+       registerButton = findViewById(R.id.btnRegister);
 
        loginButton.setOnClickListener(view -> {
            String user = username.getText().toString();
            String pass = password.getText().toString();
            login(user, pass);
         });
+
+       registerButton.setOnClickListener(view ->{
+            String newUser = username.getText().toString();
+            String newPass = password.getText().toString();
+            MakeAccount(newUser, newPass);
+        });
     }
-    private void login(String user, String pass){
-        if(user.equals("admin") && pass.equals("pass")){
-            Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
-            message.setVisibility(GONE);
-            Intent goToHomePage = new Intent(MainActivity.this, HomePage.class);
-            startActivity(goToHomePage);
-        } else {
-            message.setVisibility(VISIBLE);
-            Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show();
-            message.setText("login failed");
-        }
+    private void login(String user, String pass) {
+        mAuth.signInWithEmailAndPassword(user, pass).addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                message.setVisibility(VISIBLE);
+                message.setText("logged in com sucesso");
+                Toast.makeText(this, "logged in com sucesso", Toast.LENGTH_SHORT).show();
+                Intent goToHomePage = new Intent(MainActivity.this, HomePage.class);
+                startActivity(goToHomePage);
+            } else {
+                message.setVisibility(VISIBLE);
+                message.setText("Falha ao dar login");
+                Toast.makeText(this, "Falha ao dar login", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
+
+    private void MakeAccount(String email, String pass) {
+        mAuth.createUserWithEmailAndPassword(email, pass)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        message.setVisibility(VISIBLE);
+                        message.setText("Registado com sucesso");
+                        Toast.makeText(this, "Registado com sucesso", Toast.LENGTH_SHORT).show();
+                        Intent goToRegisterMenu = new Intent(MainActivity.this, RegisterMenu.class);
+                        startActivity(goToRegisterMenu);
+                    } else {
+                        message.setVisibility(VISIBLE);
+                        message.setText("Falha ao registar: " + task.getException().getMessage());
+                        Toast.makeText(this, "Falha ao registar", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
 
 
 }

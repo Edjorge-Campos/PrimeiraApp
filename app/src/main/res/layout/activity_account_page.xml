@@ -1,153 +1,139 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F4D06F"
-    android:padding="20dp"
-    tools:context=".AccountPage">
+    android:background="@color/background"
+    android:fillViewport="true"
+    >
 
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Account"
-        android:textColor="@color/black"
-        android:textSize="36sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="vertical"
+        android:padding="24dp">
 
-    <TextView
-        android:id="@+id/noMatter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="64dp"
-        android:text="Nome:"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:textStyle="italic"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView3" />
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="16dp"
-        app:cardBackgroundColor="#FFFFFF"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="0dp"
-        app:strokeColor="#CCCCCC"
-        app:strokeWidth="1dp"
-        app:layout_constraintBottom_toBottomOf="@id/noMatter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/barrierLabels"
-        app:layout_constraintTop_toTopOf="@id/noMatter">
 
         <TextView
-            android:id="@+id/name"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="14dp"
-            android:paddingVertical="10dp"
-            android:text="JohnDough"
-            android:textColor="@color/black"
-            android:textSize="17sp" />
-    </com.google.android.material.card.MaterialCardView>
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="24dp"
+            android:text="Account"
+            android:textColor="@color/text_primary"
+            android:textSize="28sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/noMatter2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="36dp"
-        android:text="phone number:"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:textStyle="italic"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardName" />
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardPhone"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="16dp"
-        app:cardBackgroundColor="#FFFFFF"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="0dp"
-        app:strokeColor="#CCCCCC"
-        app:strokeWidth="1dp"
-        app:layout_constraintBottom_toBottomOf="@id/noMatter2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/barrierLabels"
-        app:layout_constraintTop_toTopOf="@id/noMatter2">
+        <View
+            android:layout_width="0dp"
+            android:layout_height="48dp" />
 
         <TextView
-            android:id="@+id/phonenumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nome"
+            android:textColor="@color/text_secondary"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="8dp" />
+
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="14dp"
-            android:paddingVertical="10dp"
-            android:text="999 999 999"
-            android:textColor="@color/black"
-            android:textSize="17sp" />
-    </com.google.android.material.card.MaterialCardView>
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
+            app:strokeColor="#E0E0E0"
+            app:strokeWidth="1dp"
+            xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:id="@+id/noMatter3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="36dp"
-        android:text="availability:"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:textStyle="italic"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardPhone" />
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="14dp"
+                android:text="JohnDough"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardAvailability"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="16dp"
-        app:cardBackgroundColor="#FFFFFF"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="0dp"
-        app:strokeColor="#CCCCCC"
-        app:strokeWidth="0dp"
-        app:layout_constraintBottom_toBottomOf="@id/noMatter3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/barrierLabels"
-        app:layout_constraintTop_toTopOf="@id/noMatter3">
+        </com.google.android.material.card.MaterialCardView>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="24dp" />
 
         <TextView
-            android:id="@+id/availability"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Telemóvel"
+            android:textColor="@color/text_secondary"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="8dp" />
+
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="14dp"
-            android:paddingVertical="10dp"
-            android:text="Mondays"
-            android:textColor="@color/black"
-            android:textSize="17sp" />
-    </com.google.android.material.card.MaterialCardView>
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
+            app:strokeColor="#E0E0E0"
+            app:strokeWidth="1dp"
+            xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrierLabels"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="end"
-        app:constraint_referenced_ids="noMatter,noMatter2,noMatter3" />
+            <TextView
+                android:id="@+id/phonenumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="14dp"
+                android:text="999 999 999"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="24dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Disponibilidade"
+            android:textColor="@color/text_secondary"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="8dp" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
+            app:strokeColor="#E0E0E0"
+            app:strokeWidth="1dp"
+            xmlns:app="http://schemas.android.com/apk/res-auto">
+
+            <TextView
+                android:id="@+id/availability"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="14dp"
+                android:text="Mondays"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+</ScrollView>
