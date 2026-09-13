@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "595347387491",
+    "project_id": "volunteerapp-a6cd6",
+    "storage_bucket": "volunteerapp-a6cd6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:595347387491:android:3c712d39386e30bb117456",
+        "android_client_info": {
+          "package_name": "com.example.primeiraapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3ntsRF9mD8ETmC2atKZM31MONuDkuvj0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
