@@ -85,17 +85,27 @@
             app:strokeWidth="1dp"
             xmlns:app="http://schemas.android.com/apk/res-auto">
 
-            <TextView
+            <EditText
                 android:id="@+id/phonenumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="14dp"
-                android:text="999 999 999"
+                android:clickable="true"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
 
         </com.google.android.material.card.MaterialCardView>
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:backgroundTint="@color/text_primary"
+            android:text="Alterar número de telemovel"
+
+            android:textColor="@color/white" />
 
         <View
             android:layout_width="0dp"
@@ -129,7 +139,7 @@
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="14dp"
                 android:text="Mondays"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="16sp" />
 
         </com.google.android.material.card.MaterialCardView>

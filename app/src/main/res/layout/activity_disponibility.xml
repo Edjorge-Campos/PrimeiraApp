@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    android:padding="8dp">
+
+    <!-- Título superior idêntico à imagem -->
+    <TextView
+        android:id="@+id/tvTituloHorario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:text="Horário Semanal"
+        android:textColor="#212121"
+        android:textSize="26sp"
+        android:textStyle="bold" />
+
+    <!-- Scroll vertical para percorrer as várias horas do dia -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <!-- Scroll horizontal para permitir deslizar entre a segunda-feira e o domingo -->
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fillViewport="true">
+
+            <!-- A grelha onde o código Java insere as linhas e células -->
+            <TableLayout
+                android:id="@+id/tableLayoutSchedule"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#9E9E9E"
+                android:padding="1dp" />
+
+        </HorizontalScrollView>
+    </ScrollView>
+
+</LinearLayout>

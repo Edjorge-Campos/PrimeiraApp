@@ -12,7 +12,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class HomePage extends AppCompatActivity {
 
-    Button schedules, account;
+    Button schedules, account, availability;
 
 
     @Override
@@ -23,6 +23,7 @@ public class HomePage extends AppCompatActivity {
 
        schedules = findViewById(R.id.SchButton);
        account = findViewById(R.id.AccButton);
+       availability = findViewById(R.id.dispButton);
 
        schedules.setOnClickListener(view -> {
            Intent goToSchedules  = new Intent(HomePage.this, SchedulePage.class);
@@ -33,6 +34,10 @@ public class HomePage extends AppCompatActivity {
            Intent goToAccount = new Intent(HomePage.this, AccountPage.class);
            startActivity(goToAccount);
        });
+
+       availability.setOnClickListener(view ->{
+           Intent goToDisponibility = new Intent(HomePage.this, Disponibility.class);
+        });
 
 
     }
