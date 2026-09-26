@@ -1,0 +1,51 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return signedIn() && request.auth.token.admin == true;
+    }
+
+    function ownsUserDocument(uid) {
+      return signedIn() && request.auth.uid == uid;
+    }
+
+    function shiftExistsAndIsOpen(shiftId) {
+      return exists(/databases/$(database)/documents/shifts/$(shiftId))
+        && get(/databases/$(database)/documents/shifts/$(shiftId)).data.status != "cancelled";
+    }
+
+    match /shifts/{shiftId} {
+      // The Android client must query with status != "cancelled".
+      allow read: if signedIn() && resource.data.status != "cancelled";
+      allow create, update, delete: if isAdmin();
+
+      match /signups/{uid} {
+        allow read: if ownsUserDocument(uid);
+        allow create: if ownsUserDocument(uid)
+          && shiftExistsAndIsOpen(shiftId)
+          && request.resource.data.keys().hasOnly(["userId", "shiftId", "createdAt"])
+          && request.resource.data.userId == request.auth.uid
+          && request.resource.data.shiftId == shiftId
+          && request.resource.data.createdAt == request.time;
+        allow delete: if ownsUserDocument(uid) && shiftExistsAndIsOpen(shiftId);
+        allow update: if false;
+      }
+    }
+
+    match /Users/{uid} {
+      allow read: if ownsUserDocument(uid);
+      allow create: if ownsUserDocument(uid)
+        && request.resource.data.keys().hasOnly(["phoneNumber"])
+        && request.resource.data.phoneNumber is string;
+      allow update: if ownsUserDocument(uid)
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(["phoneNumber"])
+        && request.resource.data.phoneNumber is string;
+      allow delete: if false;
+    }
+  }
+}
