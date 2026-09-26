@@ -81,7 +81,9 @@ public class SchedulePage extends AppCompatActivity {
 
     private void loadShifts() {
         setLoading(true);
-        db.collection("shifts").get()
+        db.collection("shifts")
+                .whereNotEqualTo("status", "cancelled")
+                .get()
                 .addOnSuccessListener(this::onShiftsLoaded)
                 .addOnFailureListener(error -> {
                     setLoading(false);
