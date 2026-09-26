@@ -27,6 +27,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (mAuth.getCurrentUser() != null) {
+            openHomePage();
+            return;
+        }
+
         setContentView(R.layout.activity_main);
 
        message = findViewById(R.id.message);
@@ -54,8 +60,7 @@ public class MainActivity extends AppCompatActivity {
                 message.setVisibility(VISIBLE);
                 message.setText("logged in com sucesso");
                 Toast.makeText(this, "logged in com sucesso", Toast.LENGTH_SHORT).show();
-                Intent goToHomePage = new Intent(MainActivity.this, HomePage.class);
-                startActivity(goToHomePage);
+                openHomePage();
             } else {
                 message.setVisibility(VISIBLE);
                 message.setText("Falha ao dar login");
@@ -81,8 +86,11 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
+    private void openHomePage() {
+        Intent goToHomePage = new Intent(MainActivity.this, HomePage.class);
+        goToHomePage.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(goToHomePage);
+    }
 
 
 }
-
-
