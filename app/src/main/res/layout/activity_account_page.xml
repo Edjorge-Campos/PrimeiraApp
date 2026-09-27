@@ -55,7 +55,7 @@
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="14dp"
                 android:text="JohnDough"
-                android:textColor="@color/white"
+                android:textColor="@color/text_primary"
                 android:textSize="16sp" />
 
         </com.google.android.material.card.MaterialCardView>
@@ -92,7 +92,7 @@
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="14dp"
                 android:clickable="true"
-                android:textColor="@color/white"
+                android:textColor="@color/text_primary"
                 android:textSize="16sp" />
 
         </com.google.android.material.card.MaterialCardView>
@@ -139,7 +139,7 @@
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="14dp"
                 android:text="Mondays"
-                android:textColor="@color/black"
+                android:textColor="@color/text_primary"
                 android:textSize="16sp" />
 
         </com.google.android.material.card.MaterialCardView>

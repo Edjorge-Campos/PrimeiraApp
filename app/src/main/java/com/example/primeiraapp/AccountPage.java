@@ -3,13 +3,10 @@ package com.example.primeiraapp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.SetOptions;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,8 +18,6 @@ import java.util.Map;
 public class AccountPage extends AppCompatActivity {
     FirebaseAuth mAuth;
     EditText cellNumber;
-    Spinner availabilityBySpinner;
-    TextView disp;
     Button btnSave;
     FirebaseFirestore db;
 
@@ -32,23 +27,18 @@ public class AccountPage extends AppCompatActivity {
         setContentView(R.layout.activity_account_page);
 
         mAuth = FirebaseAuth.getInstance();
-        disp = findViewById(R.id.availability);
         cellNumber = findViewById(R.id.phonenumber);
         btnSave = findViewById(R.id.btnSave);
         db = FirebaseFirestore.getInstance();
-        BringCellphoneBack();
+        loadPhoneNumber();
 
 
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        btnSave.setOnClickListener(v -> {
 
                 String number = cellNumber.getText().toString().trim();
                 if (number.isEmpty()) {
                     Toast.makeText(AccountPage.this, "Por favor, insira o número", Toast.LENGTH_SHORT).show();
                     return;
-                } else {
-                    Toast.makeText(AccountPage.this, "Guardando: " + number, Toast.LENGTH_SHORT).show();
                 }
                 FirebaseUser user = mAuth.getCurrentUser();
                 if (user == null) {
@@ -60,27 +50,18 @@ public class AccountPage extends AppCompatActivity {
                 userUpdates.put("phoneNumber",number);
 
                 db.collection("Users").document(user.getUid())
-                .set(userUpdates,SetOptions.merge())
+                        .set(userUpdates, SetOptions.merge())
                         .addOnSuccessListener(documentReference -> {
                             Toast.makeText(AccountPage.this, "Guardado na base de dados", Toast.LENGTH_SHORT).show();
                             cellNumber.setText(number);
                         })
                         .addOnFailureListener(e -> {
-                            Toast.makeText(AccountPage.this, "Erro ao adicionar o numero" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AccountPage.this, "Erro ao adicionar o número: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         });
+        });
+    }
 
-            }
-
-
-
-
-
-
-
-    });
-}
-
-    private void BringCellphoneBack(){
+    private void loadPhoneNumber() {
         FirebaseUser user = mAuth.getCurrentUser();
         if (user != null) {
             db.collection("Users").document(user.getUid())
@@ -95,11 +76,5 @@ public class AccountPage extends AppCompatActivity {
                         Toast.makeText(AccountPage.this, "Erro ao carregar dados: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     });
         }
-
-
-
     }
-
-
-
 }
