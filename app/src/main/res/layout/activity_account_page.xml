@@ -142,7 +142,21 @@
                 android:textColor="@color/text_primary"
                 android:textSize="16sp" />
 
+
         </com.google.android.material.card.MaterialCardView>
+
+        <Button
+            android:id="@+id/LogoutButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="32dp"
+            android:backgroundTint="@color/error"
+            android:paddingHorizontal="100dp"
+            android:paddingVertical="14dp"
+            android:text="Logout"
+
+            android:textColor="@color/white" />
 
     </LinearLayout>
 

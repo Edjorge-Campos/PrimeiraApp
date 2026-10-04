@@ -4,10 +4,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,7 +20,7 @@ import java.util.Map;
 public class AccountPage extends AppCompatActivity {
     FirebaseAuth mAuth;
     EditText cellNumber;
-    Button btnSave;
+    Button btnSave, btnLogout;
     FirebaseFirestore db;
 
     @Override
@@ -28,6 +30,7 @@ public class AccountPage extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         cellNumber = findViewById(R.id.phonenumber);
+        btnLogout = findViewById(R.id.LogoutButton);
         btnSave = findViewById(R.id.btnSave);
         db = FirebaseFirestore.getInstance();
         loadPhoneNumber();
@@ -58,6 +61,13 @@ public class AccountPage extends AppCompatActivity {
                         .addOnFailureListener(e -> {
                             Toast.makeText(AccountPage.this, "Erro ao adicionar o número: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         });
+        });
+        btnLogout.setOnClickListener(v -> {
+            mAuth.signOut();
+            Toast.makeText(AccountPage.this, "Sessão terminada", Toast.LENGTH_SHORT).show();
+            Intent goLoginPage = new Intent(AccountPage.this, MainActivity.class);
+            startActivity(goLoginPage);
+            finish();
         });
     }
 

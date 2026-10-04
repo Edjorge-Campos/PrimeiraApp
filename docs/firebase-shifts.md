@@ -6,28 +6,23 @@ local or in a secret-managed deployment environment.
 
 ## Shift document schema
 
-Create documents in the top-level `shifts` collection. The document ID is the
+Create documents in the top-level `turnos` collection. The document ID is the
 stable `shiftId` used by signup documents.
 
 ```json
 {
-  "date": "2026-10-05",
-  "startTime": "08:00",
-  "endTime": "16:00",
-  "title": "Turno da manhã",
-  "description": "Entrada principal",
-  "status": "open"
+  "DiaDaSemana": 1,
+  "Inicio": "08:00",
+  "Status": "open"
 }
 ```
 
-`date` must be `YYYY-MM-DD`; `startTime` and `endTime` must be `HH:mm`.
-`description` may be omitted. The rules accept any non-empty status string,
-but the Android client treats every status except `cancelled` as visible and
-available for signup. Use `open` for a normal shift and `cancelled` to hide a
-shift.
+`DiaDaSemana` is a number from 1 (Monday) to 7 (Sunday), and `Inicio` must be
+`HH:mm`. The Android client queries only shifts with `Status` equal to `open`;
+cancelled shifts remain stored but are not shown in the schedule.
 
 Signup documents are created by the app at
-`shifts/{shiftId}/signups/{authUid}`:
+`turnos/{shiftId}/signups/{authUid}`:
 
 ```json
 {
@@ -60,12 +55,12 @@ server timestamp and the rules require it to match the request time.
 
 With a normal email/password account, verify that:
 
-1. A non-cancelled shift can be read and appears on the calendar.
+1. An open recurring shift can be read and appears for its weekday.
 2. The app can create exactly one signup and then delete that same signup
    before the shift starts.
 3. A second create attempt is rejected and an account cannot read, create, or
    delete another UID's signup.
-4. A cancelled shift is not returned by the calendar and cannot receive a new
+4. A cancelled shift is not returned by the schedule and cannot receive a new
    signup.
 
 With the admin account, verify that a shift with the documented shape can be

@@ -15,29 +15,23 @@ service cloud.firestore {
     }
 
     function shiftExistsAndIsOpen(shiftId) {
-      return exists(/databases/$(database)/documents/shifts/$(shiftId))
-        && get(/databases/$(database)/documents/shifts/$(shiftId)).data.status != "cancelled";
+      return exists(/databases/$(database)/documents/turnos/$(shiftId))
+        && get(/databases/$(database)/documents/turnos/$(shiftId)).data.Status == "open";
     }
 
     function validShift(data) {
-      return data.keys().hasAll(["date", "startTime", "endTime", "title", "status"])
-        && data.keys().hasOnly(["date", "startTime", "endTime", "title", "description", "status"])
-        && data.date is string
-        && data.date.matches("^[0-9]{4}-[0-9]{2}-[0-9]{2}$")
-        && data.startTime is string
-        && data.startTime.matches("^[0-9]{2}:[0-9]{2}$")
-        && data.endTime is string
-        && data.endTime.matches("^[0-9]{2}:[0-9]{2}$")
-        && data.title is string
-        && data.title.size() > 0
-        && data.status is string
-        && data.status.size() > 0
-        && (!data.keys().hasAny(["description"]) || data.description is string);
+      return data.keys().hasAll(["DiaDaSemana", "Inicio", "Status"])
+        && data.keys().hasOnly(["DiaDaSemana", "Inicio", "Status"])
+        && data.DiaDaSemana is int
+        && data.DiaDaSemana >= 1
+        && data.DiaDaSemana <= 7
+        && data.Inicio is string
+        && data.Inicio.matches("^[0-9]{2}:[0-9]{2}$")
+        && data.Status is string;
     }
 
-    match /shifts/{shiftId} {
-      // The Android client must query with status != "cancelled".
-      allow read: if signedIn() && resource.data.status != "cancelled";
+    match /turnos/{shiftId} {
+      allow read: if signedIn();
       allow create: if isAdmin() && validShift(request.resource.data);
       allow update: if isAdmin() && validShift(request.resource.data);
       allow delete: if isAdmin();
