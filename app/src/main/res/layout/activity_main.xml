@@ -97,8 +97,10 @@
             android:layout_height="56dp"
             android:text="Entrar"
             android:textSize="16sp"
+            android:textStyle="bold"
+            android:textAllCaps="false"
             android:layout_marginTop="24dp"
-            app:cornerRadius="12dp"
+            app:cornerRadius="10dp"
             app:backgroundTint="@color/primary" />
 
         <com.google.android.material.button.MaterialButton
@@ -107,8 +109,10 @@
             android:layout_height="56dp"
             android:text="Criar conta"
             android:textSize="16sp"
+            android:textStyle="bold"
+            android:textAllCaps="false"
             android:layout_marginTop="8dp"
-            app:cornerRadius="12dp"
+            app:cornerRadius="10dp"
             style="@style/Widget.Material3.Button.OutlinedButton" />
 
     </LinearLayout>

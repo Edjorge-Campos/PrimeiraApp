@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#FFFFFF"
+    android:background="@color/background"
     android:padding="8dp"
     android:id="@+id/main">
     <TextView
@@ -14,7 +14,7 @@
         android:paddingTop="16dp"
         android:paddingBottom="16dp"
         android:text="Disponibilidade semanal"
-        android:textColor="#212121"
+        android:textColor="@color/text_primary"
         android:textSize="26sp"
         android:textStyle="bold" />
     <ScrollView
@@ -30,7 +30,7 @@
                 android:id="@+id/tableLayoutDisponibility"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#9E9E9E"
+                android:background="@color/card_stroke"
                 android:padding="1dp" />
 
         </HorizontalScrollView>

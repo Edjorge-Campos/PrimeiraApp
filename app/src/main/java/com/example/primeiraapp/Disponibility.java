@@ -1,7 +1,6 @@
 package com.example.primeiraapp;
 
 import android.os.Bundle;
-import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.view.Gravity;
 import android.view.View;
@@ -72,7 +71,9 @@ public class Disponibility extends AppCompatActivity {
         TextView cell = new TextView(this);
         cell.setText(text);
         cell.setGravity(Gravity.CENTER);
-        cell.setTextColor(header ? Color.WHITE : Color.DKGRAY);
+        cell.setTextColor(header
+                ? getResources().getColor(R.color.on_primary)
+                : getResources().getColor(R.color.text_primary));
         cell.setTextSize(header ? 13 : 14);
         cell.setPadding(4, 12, 4, 12);
 
@@ -84,7 +85,9 @@ public class Disponibility extends AppCompatActivity {
         cell.setLayoutParams(params);
 
         GradientDrawable background = new GradientDrawable();
-        background.setColor(header ? Color.rgb(63, 81, 181) : Color.WHITE);
+        background.setColor(header
+                ? getResources().getColor(R.color.primary)
+                : getResources().getColor(R.color.surface));
         cell.setBackground(background);
         return cell;
     }
@@ -93,9 +96,13 @@ public class Disponibility extends AppCompatActivity {
         TextView cell = (TextView) view;
         boolean selected = "Disponível".contentEquals(cell.getText());
         cell.setText(selected ? "" : "Disponível");
-        cell.setTextColor(selected ? Color.DKGRAY : Color.rgb(27, 94, 32));
+        cell.setTextColor(selected
+                ? getResources().getColor(R.color.text_primary)
+                : getResources().getColor(R.color.secondary));
         GradientDrawable background = new GradientDrawable();
-        background.setColor(selected ? Color.WHITE : Color.rgb(200, 230, 201));
+        background.setColor(selected
+                ? getResources().getColor(R.color.surface)
+                : getResources().getColor(R.color.primary_container));
         cell.setBackground(background);
     }
 

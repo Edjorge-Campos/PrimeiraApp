@@ -1,27 +1,26 @@
 <resources>
     <!-- Cores principais -->
     <color name="primary">#F5C518</color>
-    <color name="on_primary">#1B5E20</color>
-    <color name="primary_container">#FFFDE7</color>
+    <color name="on_primary">#17130A</color>
+    <color name="primary_container">#3B3210</color>
 
     <!-- Cores secundárias -->
-    <color name="secondary">#1B5E20</color>
-    <color name="on_secondary">#FFFFFF</color>
+    <color name="secondary">#2A9D78</color>
+    <color name="on_secondary">#071A14</color>
 
     <!-- Cores de fundo -->
-    <color name="background">#FFFDE7</color>
-    <color name="surface">#FFFFFF</color>
+    <color name="background">#101418</color>
+    <color name="surface">#1A2027</color>
 
     <!-- Cores de texto -->
-    <color name="text_primary">#1B5E20</color>
-    <color name="text_secondary">#555555</color>
+    <color name="text_primary">#F2F4F7</color>
+    <color name="text_secondary">#AAB4C0</color>
 
     <!-- Cores de erro -->
-    <color name="error">#E53935</color>
+    <color name="error">#FF6B6B</color>
 
     <!-- Cores extras -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="card_stroke">#E0E0E0</color>
+    <color name="card_stroke">#34404C</color>
 </resources>
-

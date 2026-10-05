@@ -1,4 +1,5 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -44,9 +45,9 @@
             android:layout_height="wrap_content"
             app:cardCornerRadius="12dp"
             app:cardElevation="0dp"
-            app:strokeColor="#E0E0E0"
+            app:strokeColor="@color/card_stroke"
             app:strokeWidth="1dp"
-            xmlns:app="http://schemas.android.com/apk/res-auto">
+            >
 
             <TextView
                 android:id="@+id/name"
@@ -81,9 +82,9 @@
             android:layout_height="wrap_content"
             app:cardCornerRadius="12dp"
             app:cardElevation="0dp"
-            app:strokeColor="#E0E0E0"
+            app:strokeColor="@color/card_stroke"
             app:strokeWidth="1dp"
-            xmlns:app="http://schemas.android.com/apk/res-auto">
+            >
 
             <EditText
                 android:id="@+id/phonenumber"
@@ -97,15 +98,18 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSave"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="52dp"
             android:layout_marginTop="32dp"
-            android:backgroundTint="@color/text_primary"
+            android:backgroundTint="@color/secondary"
             android:text="Alterar número de telemovel"
-
-            android:textColor="@color/white" />
+            android:textColor="@color/on_secondary"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            app:cornerRadius="10dp" />
 
         <View
             android:layout_width="0dp"
@@ -128,9 +132,9 @@
             android:layout_height="wrap_content"
             app:cardCornerRadius="12dp"
             app:cardElevation="0dp"
-            app:strokeColor="#E0E0E0"
+            app:strokeColor="@color/card_stroke"
             app:strokeWidth="1dp"
-            xmlns:app="http://schemas.android.com/apk/res-auto">
+            >
 
             <TextView
                 android:id="@+id/availability"
@@ -145,18 +149,20 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/LogoutButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="52dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="32dp"
             android:backgroundTint="@color/error"
-            android:paddingHorizontal="100dp"
-            android:paddingVertical="14dp"
+            android:minWidth="220dp"
             android:text="Logout"
-
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            app:cornerRadius="10dp" />
 
     </LinearLayout>
 

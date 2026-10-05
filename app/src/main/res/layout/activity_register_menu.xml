@@ -6,6 +6,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
+    android:padding="24dp"
     tools:context=".RegisterMenu">
 
 
@@ -14,9 +16,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="20dp"
-        android:textSize="18dp"
+        android:textSize="18sp"
         android:textStyle="bold"
         android:text="Nome:"
+        android:textColor="@color/text_primary"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="256dp"
         android:paddingEnd="50dp"
@@ -29,6 +32,8 @@
         android:hint="name"
         android:inputType="textPersonName"
         android:padding="16dp"
+        android:textColor="@color/text_primary"
+        android:textColorHint="@color/text_secondary"
         tools:layout_editor_absoluteX="111dp"
         tools:layout_editor_absoluteY="256dp" />
 
@@ -38,8 +43,9 @@
         android:layout_height="wrap_content"
         android:padding="20dp"
         android:text="Availability:"
-        android:textSize="18dp"
+        android:textSize="18sp"
         android:textStyle="bold"
+        android:textColor="@color/text_primary"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="353dp"
         android:paddingTop="20dp"/>
