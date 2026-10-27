@@ -52,11 +52,17 @@ service cloud.firestore {
     match /Users/{uid} {
       allow read: if ownsUserDocument(uid);
       allow create: if ownsUserDocument(uid)
-        && request.resource.data.keys().hasOnly(["phoneNumber"])
-        && request.resource.data.phoneNumber is string;
+        && request.resource.data.keys().hasOnly(["phoneNumber", "displayName", "availability", "email"])
+        && (!request.resource.data.keys().hasAny(["phoneNumber"]) || request.resource.data.phoneNumber is string)
+        && (!request.resource.data.keys().hasAny(["displayName"]) || request.resource.data.displayName is string)
+        && (!request.resource.data.keys().hasAny(["availability"]) || request.resource.data.availability is string)
+        && (!request.resource.data.keys().hasAny(["email"]) || request.resource.data.email is string);
       allow update: if ownsUserDocument(uid)
-        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(["phoneNumber"])
-        && request.resource.data.phoneNumber is string;
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(["phoneNumber", "displayName", "availability", "email"])
+        && (!request.resource.data.diff(resource.data).affectedKeys().hasAny(["phoneNumber"]) || request.resource.data.phoneNumber is string)
+        && (!request.resource.data.diff(resource.data).affectedKeys().hasAny(["displayName"]) || request.resource.data.displayName is string)
+        && (!request.resource.data.diff(resource.data).affectedKeys().hasAny(["availability"]) || request.resource.data.availability is string)
+        && (!request.resource.data.diff(resource.data).affectedKeys().hasAny(["email"]) || request.resource.data.email is string);
       allow delete: if false;
     }
   }

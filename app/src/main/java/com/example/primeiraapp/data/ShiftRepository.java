@@ -1,14 +1,20 @@
 package com.example.primeiraapp.data;
 
+import android.util.Log;
+
 import com.example.primeiraapp.model.Shift;
 import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import android.util.Log;
-
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ShiftRepository {
 
@@ -36,6 +42,7 @@ public class ShiftRepository {
         for (DocumentSnapshot document : snapshot.getDocuments()) {
             Shift shift = document.toObject(Shift.class);
             if (shift != null) {
+                shift.setId(document.getId());
                 Log.d(TAG, "Turno recebido: id=" + document.getId()
                         + ", DiaDaSemana=" + shift.getDiaDaSemana()
                         + ", Inicio=" + shift.getInicio()
@@ -63,4 +70,47 @@ public class ShiftRepository {
                 });
     }
 
+    public Task<DocumentSnapshot> verificarInscricao(String shiftId, String userId) {
+        if (shiftId == null || shiftId.trim().isEmpty() || userId == null || userId.trim().isEmpty()) {
+            return Tasks.forException(new IllegalArgumentException("ShiftId e UID do utilizador incorretos."));
+        }
+
+        DocumentReference signupRef = firestore.collection(COLLECTION_TURNOS)
+                .document(shiftId)
+                .collection("signups")
+                .document(userId);
+
+        return signupRef.get();
+    }
+
+    public Task<Void> inscreverUtilizador(String shiftId, String userId) {
+        if (shiftId == null || shiftId.trim().isEmpty() || userId == null || userId.trim().isEmpty()) {
+            return Tasks.forException(new IllegalArgumentException("ShiftId e UID do utilizador errados."));
+        }
+
+        Map<String, Object> signupData = new HashMap<>();
+        signupData.put("userId", userId);
+        signupData.put("shiftId", shiftId);
+        signupData.put("createdAt", FieldValue.serverTimestamp());
+
+        DocumentReference signupRef = firestore.collection(COLLECTION_TURNOS)
+                .document(shiftId)
+                .collection("signups")
+                .document(userId);
+
+        return signupRef.set(signupData);
+    }
+
+    public Task<Void> cancelarInscricao(String shiftId, String userId) {
+        if (shiftId == null || shiftId.trim().isEmpty() || userId == null || userId.trim().isEmpty()) {
+            return Tasks.forException(new IllegalArgumentException("ShiftId e UID do utilizador errados."));
+        }
+
+        DocumentReference signupRef = firestore.collection(COLLECTION_TURNOS)
+                .document(shiftId)
+                .collection("signups")
+                .document(userId);
+
+        return signupRef.delete();
+    }
 }

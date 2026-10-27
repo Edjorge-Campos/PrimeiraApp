@@ -9,8 +9,17 @@ public class Shift {
     private String inicio;
     @PropertyName("Status")
     private String status;
+    private String id;
 
     public Shift() {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public boolean isOpen() {
