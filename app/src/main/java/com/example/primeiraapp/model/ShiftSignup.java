@@ -1,6 +1,5 @@
 package com.example.primeiraapp.model;
 
-import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.PropertyName;
 
 public class ShiftSignup {
