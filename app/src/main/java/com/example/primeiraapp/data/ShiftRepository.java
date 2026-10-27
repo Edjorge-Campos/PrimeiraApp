@@ -83,15 +83,29 @@ public class ShiftRepository {
         return signupRef.get();
     }
 
-    public Task<Void> inscreverUtilizador(String shiftId, String userId) {
-        if (shiftId == null || shiftId.trim().isEmpty() || userId == null || userId.trim().isEmpty()) {
-            return Tasks.forException(new IllegalArgumentException("ShiftId e UID do utilizador errados."));
+    public boolean isValidSignupCandidate(String shiftId, String userId) {
+        return shiftId != null && !shiftId.trim().isEmpty()
+                && userId != null && !userId.trim().isEmpty();
+    }
+
+    public Map<String, Object> buildSignupPayload(String shiftId, String userId) {
+        if (!isValidSignupCandidate(shiftId, userId)) {
+            throw new IllegalArgumentException("ShiftId e UID do utilizador são obrigatórios.");
         }
 
         Map<String, Object> signupData = new HashMap<>();
         signupData.put("userId", userId);
         signupData.put("shiftId", shiftId);
         signupData.put("createdAt", FieldValue.serverTimestamp());
+        return signupData;
+    }
+
+    public Task<Void> inscreverUtilizador(String shiftId, String userId) {
+        if (shiftId == null || shiftId.trim().isEmpty() || userId == null || userId.trim().isEmpty()) {
+            return Tasks.forException(new IllegalArgumentException("ShiftId e UID do utilizador errados."));
+        }
+
+        Map<String, Object> signupData = buildSignupPayload(shiftId, userId);
 
         DocumentReference signupRef = firestore.collection(COLLECTION_TURNOS)
                 .document(shiftId)

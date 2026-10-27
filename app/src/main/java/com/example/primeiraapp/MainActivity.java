@@ -13,12 +13,18 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
+import com.google.firebase.auth.FirebaseUser;
 
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
 
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
     TextView message;
     EditText username, password;
     Button loginButton, registerButton;
@@ -70,9 +76,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void MakeAccount(String email, String pass) {
+        if (email == null || email.trim().isEmpty() || pass == null || pass.trim().isEmpty()) {
+            message.setVisibility(VISIBLE);
+            message.setText("Introduce um email e uma password válidos.");
+            Toast.makeText(this, "Introduce um email e uma password válidos.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         mAuth.createUserWithEmailAndPassword(email, pass)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
+                        FirebaseUser createdUser = mAuth.getCurrentUser();
+                        if (createdUser != null) {
+                            Map<String, Object> userMap = new HashMap<>();
+                            String displayName = email.contains("@") ? email.substring(0, email.indexOf('@')) : email.trim();
+                            userMap.put("displayName", displayName);
+                            userMap.put("email", createdUser.getEmail() != null ? createdUser.getEmail() : email.trim());
+                            db.collection("Users")
+                                    .document(createdUser.getUid())
+                                    .set(userMap, SetOptions.merge());
+                        }
+
                         message.setVisibility(VISIBLE);
                         message.setText("Registado com sucesso");
                         Toast.makeText(this, "Registado com sucesso", Toast.LENGTH_SHORT).show();

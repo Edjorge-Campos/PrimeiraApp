@@ -30,6 +30,7 @@ public class SchedulePage extends AppCompatActivity {
     private TextView emptyState;
     private final Set<String> subscribedShiftIds = new HashSet<>();
     private int selectedWeekday = -1;
+    private boolean signupInProgress = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
